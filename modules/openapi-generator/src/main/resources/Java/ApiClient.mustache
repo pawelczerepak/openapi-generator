@@ -51,6 +51,7 @@ import java.text.DateFormat;
 
 import {{invokerPackage}}.auth.Authentication;
 import {{invokerPackage}}.auth.HttpBasicAuth;
+import {{invokerPackage}}.auth.HttpBearerAuth;
 import {{invokerPackage}}.auth.ApiKeyAuth;
 import {{invokerPackage}}.auth.OAuth;
 
@@ -101,7 +102,8 @@ public class ApiClient {
 
     // Setup authentications (key: authentication name, value: authentication).
     authentications = new HashMap<String, Authentication>();{{#authMethods}}{{#isBasic}}
-    authentications.put("{{name}}", new HttpBasicAuth());{{/isBasic}}{{#isApiKey}}
+    authentications.put("{{name}}", new HttpBasicAuth());{{/isBasic}}{{#isBearer}}
+    authentications.put("{{name}}", new HttpBearerAuth());{{/isBearer}}{{#isApiKey}}
     authentications.put("{{name}}", new ApiKeyAuth({{#isKeyInHeader}}"header"{{/isKeyInHeader}}{{^isKeyInHeader}}"query"{{/isKeyInHeader}}, "{{keyParamName}}"));{{/isApiKey}}{{#isOAuth}}
     authentications.put("{{name}}", new OAuth());{{/isOAuth}}{{/authMethods}}
     // Prevent the authentications from being modified.
@@ -231,6 +233,20 @@ public class ApiClient {
       }
     }
     throw new RuntimeException("No HTTP basic authentication configured!");
+  }
+
+  /**
+  * Helper method to set API key value for the first HTTP bearer authentication.
+  * @param apiKey API key
+  */
+    public void setBearerApiKey(String apiKey) {
+      for (Authentication auth : authentications.values()) {
+      if (auth instanceof HttpBearerAuth) {
+        ((HttpBearerAuth) auth).setApiKey(apiKey);
+        return;
+      }
+    }
+    throw new RuntimeException("No HTTP bearer authentication configured!");
   }
 
   /**

@@ -28,7 +28,11 @@ var defaultClient = {{{moduleName}}}.ApiClient.instance;
 var {{{name}}} = defaultClient.authentications['{{{name}}}'];
 {{{name}}}.username = 'YOUR USERNAME';
 {{{name}}}.password = 'YOUR PASSWORD';
-{{/isBasic}}
+{{/isBasic}}{{#isBearer}}
+// Configure HTTP bearer authorization: {{{name}}}
+var {{{name}}} = defaultClient.authentications['{{{name}}}'];
+{{{name}}}.bearerApiKey = 'YOUR API KEY';
+{{/isBearer}}
 {{#isApiKey}}
 // Configure API key authorization: {{{name}}}
 var {{{name}}} = defaultClient.authentications['{{{name}}}'];

@@ -30,7 +30,7 @@ has tokens => ( is => 'ro',
                 isa => 'HashRef',
                 required => 0,
                 default => sub { {} },
-                documentation => 'The auth tokens required by the application - basic, OAuth and/or API key(s)',
+                documentation => 'The auth tokens required by the application - basic, bearer, OAuth and/or API key(s)',
                 );
 
 has _cfg => ( is => 'ro',
@@ -172,6 +172,9 @@ required and where to put them. You just need to supply the tokens.
         username => $username,
         password => $password,
 
+        # bearer
+        bearer_api_key => $bearer_api_key,
+
         # oauth
         access_token => $oauth_token,
 
@@ -208,6 +211,10 @@ String. The username for basic auth.
 =item C<$cfg-\>{password}>
 
 String. The password for basic auth.
+
+=item C<$cfg-\>{bearer_api_key}>
+
+String. The API key for bearer auth.
 
 =item C<$cfg-\>{api_key}>
 

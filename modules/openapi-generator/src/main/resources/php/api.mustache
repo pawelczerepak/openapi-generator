@@ -484,6 +484,12 @@ use {{invokerPackage}}\ObjectSerializer;
             $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
         }
         {{/isBasic}}
+        {{#isBearer}}
+        // this endpoint requires HTTP bearer authentication
+        if ($this->config->getBearerApiKey() !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getBearerApiKey();
+        }
+        {{/isBearer}}
         {{#isOAuth}}
         // this endpoint requires OAuth (access token)
         if ($this->config->getAccessToken() !== null) {

@@ -87,6 +87,11 @@ var {{{name}}} = defaultClient.authentications['{{{name}}}'];
 {{{name}}}.username = 'YOUR USERNAME'
 {{{name}}}.password = 'YOUR PASSWORD'
 {{/isBasic}}
+{{#isBearer}}
+// Configure HTTP bearer authorization: {{{name}}}
+var {{{name}}} = defaultClient.authentications['{{{name}}}'];
+{{{name}}}.apiKey = 'YOUR API KEY'
+{{/isBearer}}
 {{#isApiKey}}
 // Configure API key authorization: {{{name}}}
 var {{{name}}} = defaultClient.authentications['{{{name}}}'];
@@ -164,6 +169,8 @@ Class | Method | HTTP request | Description
 {{/isApiKey}}
 {{#isBasic}}- **Type**: HTTP basic authentication
 {{/isBasic}}
+{{#isBearer}}- **Type**: HTTP bearer authentication
+{{/isBearer}}
 {{#isOAuth}}- **Type**: OAuth
 - **Flow**: {{flow}}
 - **Authorization URL**: {{authorizationUrl}}

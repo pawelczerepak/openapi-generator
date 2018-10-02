@@ -64,6 +64,14 @@
     return basicAuthToken;
 }
 
+- (NSString *) getBearerAuthToken {
+    if (self.bearerApiKey.length == 0) { // api key not set, return empty string
+        return @"";
+    } else {
+        return [NSString stringWithFormat:@"Bearer %@", self.bearerApiKey];
+    }
+}
+
 - (NSString *) getAccessToken {
     if (self.accessToken.length == 0) { // token not set, return empty string
         return @"";
@@ -123,6 +131,15 @@
                        @"value": [self getBasicAuthToken]
                    },
 {{/isBasic}}
+{{#isBearer}}
+               @"{{name}}":
+                   @{
+                       @"type": @"bearer",
+                       @"in": @"header",
+                       @"key": @"Authorization",
+                       @"value": [self getBearerAuthToken]
+                   },
+{{/isBearer}}
 {{#isOAuth}}
                @"{{name}}":
                    @{

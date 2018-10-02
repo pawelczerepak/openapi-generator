@@ -112,6 +112,10 @@ namespace Example
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
             {{/isBasic}}
+            {{#isBearer}}
+            // Configure HTTP bearer authorization: {{{name}}}
+            Configuration.Default.BearerApiKey = "YOUR_API_KEY";
+            {{/isBearer}}
             {{#isApiKey}}
             // Configure API key authorization: {{{name}}}
             Configuration.Default.ApiKey.Add("{{{keyParamName}}}", "YOUR_API_KEY");
@@ -195,6 +199,8 @@ Authentication schemes defined for the API:
 {{/isApiKey}}
 {{#isBasic}}- **Type**: HTTP basic authentication
 {{/isBasic}}
+{{#isBearer}}- **Type**: HTTP bearer authentication
+{{/isBearer}}
 {{#isOAuth}}- **Type**: OAuth
 - **Flow**: {{flow}}
 - **Authorization URL**: {{authorizationUrl}}

@@ -340,7 +340,10 @@ sub update_params_for_auth {
             }{{/isKeyInQuery}}{{/isApiKey}}{{#isBasic}}
             if ($self->{config}{username} || $self->{config}{password}) {
                 $header_params->{'Authorization'} = 'Basic ' . encode_base64($self->{config}{username} . ":" . $self->{config}{password});
-            }{{/isBasic}}{{#isOAuth}}
+            }{{/isBasic}}{{#isBearer}}
+            if ($self->{config}{bearer_api_key}) {
+                $header_params->{'Authorization'} = 'Bearer ' . $self->{config}{bearer_api_key};
+            }{{/isBearer}}{{#isOAuth}}
             if ($self->{config}{access_token}) {
                 $header_params->{'Authorization'} = 'Bearer ' . $self->{config}{access_token};
             }{{/isOAuth}}
@@ -366,6 +369,11 @@ sub _global_auth_setup {
 	if (my $uname = delete $tokens->{username}) {
 		my $pword = delete $tokens->{password};
 		$header_params->{'Authorization'} = 'Basic '.encode_base64($uname.":".$pword);
+	}
+
+	# bearer
+	if (my $bearer_api_key = delete $tokens->{bearer_api_key}) {
+		$header_params->{'Authorization'} = 'Bearer ' . $bearer_api_key;
 	}
 	
 	# oauth

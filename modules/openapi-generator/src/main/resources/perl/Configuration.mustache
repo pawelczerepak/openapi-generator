@@ -67,6 +67,10 @@ String. The password for basic auth.
 
 String. The OAuth access token.
 
+=item bearer_api_key: (optional)
+
+String. The API key for bearer auth.
+
 =item base_url: (optional)
 
 String. The base URL of the API
@@ -92,6 +96,9 @@ sub new {
 	# username and password for HTTP basic authentication
 	$p{username} //= '';
 	$p{password} //= '';
+
+	# api key for HTTP bearer authentication
+	$p{bearer_api_key} //= '';
 
 	# access token for OAuth
 	$p{access_token} //= '';

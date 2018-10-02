@@ -33,6 +33,9 @@ class ApiClient {
 <#isBasic>
             '<name>': {type: 'basic'}<^-last>,</-last>
 </isBasic>
+<#isBearer>
+            '<name>': {type: 'bearer'}<^-last>,</-last>
+</isBearer>
 <#isApiKey>
             '<name>': {type: 'apiKey', 'in': <#isKeyInHeader>'header'</isKeyInHeader><^isKeyInHeader>'query'</isKeyInHeader>, name: '<keyParamName>'}<^-last>,</-last>
 </isApiKey>
@@ -261,6 +264,12 @@ class ApiClient {
                 case 'basic':
                     if (auth.username || auth.password) {
                         request.auth(auth.username || '', auth.password || '');
+                    }
+
+                    break;
+                case 'bearer':
+                    if (auth.apiKey) {
+                        request.set({'Authorization': 'Bearer ' + auth.apiKey});
                     }
 
                     break;

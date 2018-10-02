@@ -30,7 +30,9 @@ my $api_instance = {{moduleName}}::{{classname}}->new(
 {{#hasAuthMethods}}{{#authMethods}}{{#isBasic}}
     # Configure HTTP basic authorization: {{{name}}}
     username => 'YOUR_USERNAME',
-    password => 'YOUR_PASSWORD',{{/isBasic}}{{#isApiKey}}
+    password => 'YOUR_PASSWORD',{{/isBasic}}{{#isBearer}}
+    # Configure HTTP bearer authorization: {{{name}}}
+    bearer_api_key => 'YOUR_API_KEY',{{/isBearer}}{{#isApiKey}}
     # Configure API key authorization: {{{name}}}
     api_key => {'{{{keyParamName}}}' => 'YOUR_API_KEY'},
     # uncomment below to setup prefix (e.g. Bearer) for API key, if needed

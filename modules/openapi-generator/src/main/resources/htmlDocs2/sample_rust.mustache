@@ -5,6 +5,8 @@ pub fn main() {
 {{/allParams}}
 
     let mut context = {{classname}}::Context::default();
+    auth := context.WithValue(context.TODO(), sw.ContextBearerAuth, "API_KEY")
+    r, err := client.Service.Operation(auth, args)
     let result = client.{{operationId}}({{#allParams}}{{paramName}}, {{/allParams}}&context).wait();
     println!("{:?}", result);
 

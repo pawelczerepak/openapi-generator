@@ -67,6 +67,13 @@ class Configuration
     protected $password = '';
 
     /**
+     * Username for HTTP bearer authentication
+     *
+     * @var string
+     */
+    protected $bearerApiKey = '';
+
+    /**
      * The host
      *
      * @var string
@@ -228,6 +235,29 @@ class Configuration
     public function getPassword()
     {
         return $this->password;
+    }
+
+    /**
+     * Sets the bearer API key for HTTP bearer authentication
+     *
+     * @param string $bearerApiKey API key for HTTP bearer authentication
+     *
+     * @return $this
+     */
+    public function setBearerApiKey($bearerApiKey)
+    {
+        $this->bearerApiKey = $bearerApiKey;
+        return $this;
+    }
+
+    /**
+     * Gets the bearer API key for HTTP bearer authentication
+     *
+     * @return string Bearer API key for HTTP bearer authentication
+     */
+    public function getBearerApiKey()
+    {
+        return $this->bearerApiKey;
     }
 
     /**

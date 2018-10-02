@@ -28,6 +28,7 @@ pub(crate) enum Auth {
     None,
     ApiKey(ApiKey),
     Basic,
+    Bearer,
     Oauth,
 }
 
@@ -140,6 +141,14 @@ impl Request {
                     let auth = hyper::header::Authorization(hyper::header::Basic {
                         username: auth_conf.0.to_owned(),
                         password: auth_conf.1.to_owned(),
+                    });
+                    headers.set(auth);
+                }
+            }
+            Auth::Bearer => {
+                if let Some(ref token) = conf.bearer_auth {
+                    let auth = hyper::header::Authorization(hyper::header::Bearer {
+                        token: token.to_owned(),
                     });
                     headers.set(auth);
                 }

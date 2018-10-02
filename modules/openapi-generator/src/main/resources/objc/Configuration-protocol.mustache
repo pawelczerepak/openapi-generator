@@ -39,6 +39,11 @@ static NSString * const k{{classPrefix}}APIVersion = @"{{podVersion}}";
 @property (readonly, nonatomic) NSString *password;
 
 /**
+ * Username for HTTP Bearer Authentication
+ */
+@property (readonly, nonatomic) NSString *bearerApiKey;
+
+/**
  * Access token for OAuth
  */
 @property (readonly, nonatomic) NSString *accessToken;

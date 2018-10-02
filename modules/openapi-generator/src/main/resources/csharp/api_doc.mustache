@@ -39,6 +39,10 @@ namespace Example
             Configuration.Default.Username = "YOUR_USERNAME";
             Configuration.Default.Password = "YOUR_PASSWORD";
             {{/isBasic}}
+            {{#isBearer}}
+            // Configure HTTP bearer authorization: {{{name}}}
+            Configuration.Default.BearerApiKey = "YOUR_API_KEY";
+            {{/isBearer}}
             {{#isApiKey}}
             // Configure API key authorization: {{{name}}}
             Configuration.Default.AddApiKey("{{{keyParamName}}}", "YOUR_API_KEY");

@@ -576,6 +576,8 @@ public class AndroidClientCodegen extends DefaultCodegen implements CodegenConfi
                 (sourceFolder + File.separator + authPackage).replace(".", File.separator), "ApiKeyAuth.java"));
         supportingFiles.add(new SupportingFile("auth/httpbasicauth.mustache",
                 (sourceFolder + File.separator + authPackage).replace(".", File.separator), "HttpBasicAuth.java"));
+        supportingFiles.add(new SupportingFile("auth/httpbearerauth.mustache",
+                (sourceFolder + File.separator + authPackage).replace(".", File.separator), "HttpBearerAuth.java"));
         supportingFiles.add(new SupportingFile("auth/authentication.mustache",
                 (sourceFolder + File.separator + authPackage).replace(".", File.separator), "Authentication.java"));
 

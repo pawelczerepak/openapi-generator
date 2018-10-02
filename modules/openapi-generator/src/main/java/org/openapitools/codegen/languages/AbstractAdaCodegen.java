@@ -673,6 +673,7 @@ abstract public class AbstractAdaCodegen extends DefaultCodegen implements Codeg
                     opSecurity.type = authMethod.type;
                     opSecurity.hasMore = false;
                     opSecurity.isBasic = authMethod.isBasic;
+                    opSecurity.isBearer = authMethod.isBearer;
                     opSecurity.isApiKey = authMethod.isApiKey;
                     opSecurity.isKeyInCookie = authMethod.isKeyInCookie;
                     opSecurity.isKeyInHeader = authMethod.isKeyInHeader;

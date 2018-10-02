@@ -3,7 +3,8 @@ import {{{invokerPackage}}}.api.{{{classname}}};
 public class {{{classname}}}Example {
 
     public static void main(String[] args) {
-        {{{classname}}} apiInstance = new {{{classname}}}();
+        {{{classname}}} apiInstance = new {{{classname}}}();{{#hasAuthMethods}}{{#authMethods}}{{#isBearer}}
+        apiInstance.setBearerApiKey("YOUR_API_KEY");{{/isBearer}}{{/authMethods}}{{/hasAuthMethods}}
         {{#allParams}}
         {{{dataType}}} {{{paramName}}} = {{{example}}}; // {{{dataType}}} | {{{unescapedDescription}}}
         {{/allParams}}

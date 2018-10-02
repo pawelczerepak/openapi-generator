@@ -70,6 +70,9 @@ required and where to put them. You just need to supply the tokens.
         username => $username,
         password => $password,
 
+        # bearer
+        bearer_api_key => $bearer_api_key,
+
         # oauth
         access_token => $oauth_token,
 
@@ -104,6 +107,10 @@ as follows, but you don't need to know about this.
 - `$cfg->{password}`
 
     String. The password for basic auth.
+
+- `$cfg->{access_token}`
+
+    String. The API key for bearer auth.
 
 - `$cfg->{api_key}`
 
@@ -258,7 +265,9 @@ my $api_instance = {{moduleName}}::{{classname}}->new(
 {{#apiInfo}}{{#apis}}{{#-first}}{{#operations}}{{#operation}}{{#-first}}{{#hasAuthMethods}}{{#authMethods}}{{#isBasic}}
     # Configure HTTP basic authorization: {{{name}}}
     username => 'YOUR_USERNAME',
-    password => 'YOUR_PASSWORD',{{/isBasic}}{{#isApiKey}}
+    password => 'YOUR_PASSWORD',{{/isBasic}}{{#isBearer}}
+    # Configure HTTP bearer authorization: {{{name}}}
+    bearer_api_key => 'YOUR_API_KEY',{{/isBearer}}{{#isApiKey}}
     # Configure API key authorization: {{{name}}}
     api_key => {'{{{keyParamName}}}' => 'YOUR_API_KEY'},
     # uncomment below to setup prefix (e.g. Bearer) for API key, if needed
@@ -305,6 +314,8 @@ Class | Method | HTTP request | Description
 {{/isApiKey}}
 {{#isBasic}}- **Type**: HTTP basic authentication
 {{/isBasic}}
+{{#isBearer}}- **Type**: HTTP bearer authentication
+{{/isBearer}}
 {{#isOAuth}}- **Type**: OAuth
 - **Flow**: {{{flow}}}
 - **Authorization URL**: {{{authorizationUrl}}}

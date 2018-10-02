@@ -43,6 +43,11 @@
 @property (nonatomic) NSString *password;
 
 /**
+* Username for HTTP Bearer Authentication
+*/
+@property (nonatomic) NSString *bearerApiKey;
+
+/**
  * Access token for OAuth
  */
 @property (nonatomic) NSString *accessToken;
@@ -121,6 +126,11 @@
  * Gets Basic Auth token
  */
 - (NSString *) getBasicAuthToken;
+
+/**
+ * Gets Bearer Auth token
+ */
+- (NSString *) getBearerAuthToken;
 
 /**
  * Gets OAuth access token

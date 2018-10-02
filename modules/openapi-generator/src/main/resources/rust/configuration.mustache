@@ -7,6 +7,7 @@ pub struct Configuration<C: hyper::client::Connect> {
   pub user_agent: Option<String>,
   pub client: hyper::client::Client<C>,
   pub basic_auth: Option<BasicAuth>,
+  pub bearer_auth: Option<String>,
   pub oauth_access_token: Option<String>,
   pub api_key: Option<ApiKey>,
   // TODO: take an oauth2 token source, similar to the go one
@@ -26,6 +27,7 @@ impl<C: hyper::client::Connect> Configuration<C> {
       user_agent: {{#httpUserAgent}}Some("{{{.}}}".to_owned()){{/httpUserAgent}}{{^httpUserAgent}}Some("OpenAPI-Generator/{{version}}/rust".to_owned()){{/httpUserAgent}},
       client: client,
       basic_auth: None,
+      bearer_auth: None,
       oauth_access_token: None,
       api_key: None,
     }

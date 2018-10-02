@@ -47,6 +47,9 @@ impl<C: hyper::client::Connect>{{classname}} for {{classname}}Client<C> {
         {{#isBasic}}
             .with_auth(__internal_request::Auth::Basic)
         {{/isBasic}}
+        {{#isBearer}}
+          .with_auth(__internal_request::Auth::Bearer)
+        {{/isBearer}}
         {{#isOAuth}}
             .with_auth(__internal_request::Auth::Oauth)
         {{/isOAuth}}

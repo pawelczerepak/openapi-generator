@@ -38,6 +38,7 @@ import java.util.concurrent.TimeoutException;
 import {{invokerPackage}}.auth.Authentication;
 import {{invokerPackage}}.auth.ApiKeyAuth;
 import {{invokerPackage}}.auth.HttpBasicAuth;
+import {{invokerPackage}}.auth.HttpBearerAuth;
 import {{invokerPackage}}.request.GetRequest;
 import {{invokerPackage}}.request.PostRequest;
 import {{invokerPackage}}.request.PutRequest;
@@ -199,6 +200,9 @@ public class ApiInvoker {
     {{#isBasic}}
     INSTANCE.authentications.put("{{name}}", new HttpBasicAuth());
     {{/isBasic}}
+    {{#isBearer}}
+    INSTANCE.authentications.put("{{name}}", new HttpBearerAuth());
+    {{/isBearer}}
     {{#isOAuth}}
     // TODO: comment out below as OAuth does not exist
     //INSTANCE.authentications.put("{{name}}", new OAuth());
@@ -313,6 +317,19 @@ public class ApiInvoker {
        }
     }
     throw new RuntimeException("No HTTP basic authentication configured!");
+  }
+
+  /**
+   * Helper method to set username for the first HTTP bearer authentication.
+   */
+  public void setBearerApiKey(String apiKey) {
+    for (Authentication auth : authentications.values()) {
+       if (auth instanceof HttpBearerAuth) {
+           ((HttpBearerAuth) auth).setApiKey(apiKey);
+           return;
+       }
+    }
+    throw new RuntimeException("No HTTP bearer authentication configured!");
   }
 
   /**

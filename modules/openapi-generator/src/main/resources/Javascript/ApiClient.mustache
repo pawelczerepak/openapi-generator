@@ -45,6 +45,9 @@
 <#isBasic>
       '<name>': {type: 'basic'}<^-last>,</-last>
 </isBasic>
+<#isBearer>
+      '<name>': {type: 'bearer'}<^-last>,</-last>
+</isBearer>
 <#isApiKey>
       '<name>': {type: 'apiKey', 'in': <#isKeyInHeader>'header'</isKeyInHeader><^isKeyInHeader>'query'</isKeyInHeader>, name: '<keyParamName>'}<^-last>,</-last>
 </isApiKey>
@@ -296,6 +299,11 @@
         case 'basic':
           if (auth.username || auth.password) {
             request.auth(auth.username || '', auth.password || '');
+          }
+          break;
+        case 'bearer':
+          if (auth.bearerApiKey) {
+            request.set({'Authorization': 'Bearer ' + auth.bearerApiKey});
           }
           break;
         case 'apiKey':

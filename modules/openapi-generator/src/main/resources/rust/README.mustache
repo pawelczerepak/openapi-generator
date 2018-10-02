@@ -64,6 +64,14 @@ Example
     r, err := client.Service.Operation(auth, args)
 ```
 {{/isBasic}}
+{{#isBearer}}- **Type**: HTTP bearer authentication
+
+Example
+```
+  auth := context.WithValue(context.TODO(), sw.ContextBearerAuth, "API_KEY")
+    r, err := client.Service.Operation(auth, args)
+```
+{{/isBearer}}
 {{#isOAuth}}- **Type**: OAuth
 - **Flow**: {{{flow}}}
 - **Authorization URL**: {{{authorizationUrl}}}

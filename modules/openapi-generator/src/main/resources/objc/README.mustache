@@ -70,7 +70,9 @@ Please follow the [installation procedure](#installation--usage) and then run th
 {{#authMethods}}{{#isBasic}}// Configure HTTP basic authorization (authentication scheme: {{{name}}})
 [apiConfig setUsername:@"YOUR_USERNAME"];
 [apiConfig setPassword:@"YOUR_PASSWORD"];
-{{/isBasic}}{{#isApiKey}}
+{{/isBasic}}{{#isBearer}}// Configure HTTP bearer authorization (authentication scheme: {{{name}}})
+[apiConfig setBearerApiKey:@"YOUR_USERNAME"];
+{{/isBearer}}{{#isApiKey}}
 // Configure API key authorization: (authentication scheme: {{{name}}})
 [apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"{{{keyParamName}}}"];
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
@@ -128,6 +130,8 @@ Class | Method | HTTP request | Description
 {{/isApiKey}}
 {{#isBasic}}- **Type**: HTTP basic authentication
 {{/isBasic}}
+{{#isBearer}}- **Type**: HTTP bearer authentication
+{{/isBearer}}
 {{#isOAuth}}- **Type**: OAuth
 - **Flow**: {{{flow}}}
 - **Authorization URL**: {{{authorizationUrl}}}

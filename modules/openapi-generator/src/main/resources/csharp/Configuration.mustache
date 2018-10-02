@@ -266,6 +266,12 @@ namespace {{packageName}}.Client
         public virtual string Password { get; set; }
 
         /// <summary>
+        /// Gets or sets the API key for HTTP bearer authentication.
+        /// </summary>
+        /// <value>The API key.</value>
+        public virtual string BearerApiKey { get; set; }
+
+        /// <summary>
         /// Gets the API key with prefix.
         /// </summary>
         /// <param name="apiKeyIdentifier">API key identifier (authentication scheme).</param>

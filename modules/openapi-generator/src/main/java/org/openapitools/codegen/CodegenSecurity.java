@@ -27,7 +27,7 @@ import java.util.Map;
 public class CodegenSecurity {
     public String name;
     public String type;
-    public Boolean hasMore, isBasic, isOAuth, isApiKey;
+    public Boolean hasMore, isBasic, isBearer, isOAuth, isApiKey;
     public Map<String, Object> vendorExtensions = new HashMap<String, Object>();
     // ApiKey specific
     public String keyParamName;
@@ -56,6 +56,8 @@ public class CodegenSecurity {
         if (hasMore != null ? !hasMore.equals(that.hasMore) : that.hasMore != null)
             return false;
         if (isBasic != null ? !isBasic.equals(that.isBasic) : that.isBasic != null)
+            return false;
+        if (isBearer != null ? !isBearer.equals(that.isBearer) : that.isBearer != null)
             return false;
         if (isOAuth != null ? !isOAuth.equals(that.isOAuth) : that.isOAuth != null)
             return false;
@@ -93,6 +95,7 @@ public class CodegenSecurity {
         result = 31 * result + (type != null ? type.hashCode() : 0);
         result = 31 * result + (hasMore != null ? hasMore.hashCode() : 0);
         result = 31 * result + (isBasic != null ? isBasic.hashCode() : 0);
+        result = 31 * result + (isBearer != null ? isBearer.hashCode() : 0);
         result = 31 * result + (isOAuth != null ? isOAuth.hashCode() : 0);
         result = 31 * result + (isApiKey != null ? isApiKey.hashCode() : 0);
         result = 31 * result + (vendorExtensions != null ? vendorExtensions.hashCode() : 0);

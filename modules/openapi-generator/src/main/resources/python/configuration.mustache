@@ -51,7 +51,10 @@ class Configuration(six.with_metaclass(TypeWithDefault, object)):
         self.username = ""
         # Password for HTTP basic authentication
         self.password = ""
-{{#authMethods}}{{#isOAuth}}
+{{#authMethods}}{{#isBearer}}
+        # access token for OAuth
+        self.bearer_api_key = ""
+{{/isBearer}}{{#isOAuth}}
         # access token for OAuth
         self.access_token = ""
 {{/isOAuth}}{{/authMethods}}
@@ -225,7 +228,15 @@ class Configuration(six.with_metaclass(TypeWithDefault, object)):
                     'key': 'Authorization',
                     'value': self.get_basic_auth_token()
                 },
-{{/isBasic}}{{#isOAuth}}
+{{/isBasic}}{{#isBearer}}
+            '{{name}}':
+                {
+                    'type': 'bearer',
+                    'in': 'header',
+                    'key': 'Authorization',
+                    'value': 'Bearer ' + self.bearer_api_key
+                },
+{{/isBearer}}{{#isOAuth}}
             '{{name}}':
                 {
                     'type': 'oauth2',
