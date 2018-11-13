@@ -17,7 +17,7 @@ public class {{{classname}}}Example {
         {{{name}}}.setPassword("YOUR PASSWORD");{{/isBasic}}{{#isBearer}}
         // Configure HTTP basic authorization: {{{name}}}
         HttpBearerAuth {{{name}}} = (HttpBearerAuth) defaultClient.getAuthentication("{{{name}}}");
-        {{{name}}}.setBearerApiKey("YOUR API KEY");{{/isBearer}}{{#isApiKey}}
+        {{{name}}}.setApiKey("YOUR API KEY");{{/isBearer}}{{#isApiKey}}
         // Configure API key authorization: {{{name}}}
         ApiKeyAuth {{{name}}} = (ApiKeyAuth) defaultClient.getAuthentication("{{{name}}}");
         {{{name}}}.setApiKey("YOUR API KEY");
