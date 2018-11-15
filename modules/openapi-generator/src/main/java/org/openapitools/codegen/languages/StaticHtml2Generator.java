@@ -126,14 +126,22 @@ public class StaticHtml2Generator extends DefaultCodegen implements CodegenConfi
     }
 
     @Override
-    public String getTypeDeclaration(Schema p) {
-        if (ModelUtils.isArraySchema(p)) {
-            ArraySchema ap = (ArraySchema) p;
-            Schema inner = ap.getItems();
-            return getSchemaType(p) + "[" + getTypeDeclaration(inner) + "]";
-        } else if (ModelUtils.isMapSchema(p)) {
-            Schema inner = ModelUtils.getAdditionalProperties(p);
-            return getSchemaType(p) + "[String, " + getTypeDeclaration(inner) + "]";
+    public String getTypeDeclaration (Schema p) {
+        if (ModelUtils.isArraySchema(p) || ModelUtils.isMapSchema(p)) {
+            String type = null;
+            if (ModelUtils.isArraySchema(p)) {
+                ArraySchema ap    = (ArraySchema) p;
+                Schema      inner = ap.getItems();
+                type = getSchemaType(p) + "[" + getTypeDeclaration(inner) + "]";
+            } else if (ModelUtils.isMapSchema(p)) {
+                Schema inner = ModelUtils.getAdditionalProperties(p);
+                type = getSchemaType(p) + "[String, " + getTypeDeclaration(inner) + "]";
+            }
+            if (type != null) {
+                if (typeMapping.containsKey(type)) {
+                    return typeMapping.get(type);
+                }
+            }
         }
         return super.getTypeDeclaration(p);
     }
